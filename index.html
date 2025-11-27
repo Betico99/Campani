@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Anmeldung Kinderfreizeit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-light: #dbeafe;
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --text-main: #111827;
+      --text-muted: #4b5563;
+      --border: #e5e7eb;
+      --danger: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.4rem;
+    }
+
+    header p {
+      color: var(--text-muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+      border: 1px solid var(--border);
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+    }
+
+    p, li {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    ul {
+      padding-left: 1.1rem;
+      margin-top: 0.2rem;
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    @media (min-width: 800px) {
+      .info-grid {
+        grid-template-columns: 1.1fr 1.4fr;
+      }
+    }
+
+    /* Formular */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .form-row--two {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    @media (min-width: 640px) {
+      .form-row--two {
+        flex-direction: row;
+      }
+      .form-row--two .field {
+        flex: 1;
+      }
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--text-main);
+    }
+
+    label .required {
+      color: var(--danger);
+      margin-left: 0.15rem;
+    }
+
+    input, textarea, select {
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      padding: 0.6rem 0.7rem;
+      font-size: 0.9rem;
+      background: #f9fafb;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 1px var(--primary-light);
+      background: #ffffff;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .help-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .checkbox-row input[type="checkbox"] {
+      margin-top: 0.2rem;
+      width: 16px;
+      height: 16px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+
+    button[type="submit"] {
+      border: none;
+      border-radius: 999px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--primary);
+      color: #ffffff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.35);
+      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px rgba(37, 99, 235, 0.45);
+      background: #1d4ed8;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="badge">Anmeldung • Kinderfreizeit</div>
+    <h1>Sommer-Kinderfreizeit 2025</h1>
+    <p>Ein unvergessliches Abenteuer mit Spielen, Spaß, Gemeinschaft und spannenden Geschichten.</p>
+    <p style="margin-top:0.4rem; font-size:0.9rem;">
+      <strong>Termin:</strong> 12.–18. August 2025 &nbsp;·&nbsp;
+      <strong>Ort:</strong> Freizeithaus Sonnental &nbsp;·&nbsp;
+      <strong>Veranstalter:</strong> Ev. Kirchengemeinde Musterstadt
+    </p>
+  </header>
+
+  <div class="info-grid">
+    <!-- Infos -->
+    <section class="card">
+      <h2>Infos zur Freizeit</h2>
+      <p>
+        Wir laden alle Kinder von 8–12 Jahren zu einer Woche voller Spaß, Spielen,
+        Geländespielen, Lagerfeuer, kreativen Workshops und gemeinsamen Entdeckungen
+        rund um spannende Geschichten aus der Bibel ein.
+      </p>
+
+      <ul style="margin-top:0.6rem;">
+        <li>Alter: 8–12 Jahre</li>
+        <li>Kosten: 180 € pro Kind (Geschwisterermäßigung möglich)</li>
+        <li>Anreise: Eigenanreise zum Freizeithaus Sonnental</li>
+        <li>Anmeldeschluss: 15. Juni 2025</li>
+      </ul>
+
+      <h3 style="margin-top:1rem; font-size:1rem;">Kontakt</h3>
+      <p>
+        Ansprechpartner: Max Beispiel<br />
+        Telefon: 0123 456789<br />
+        E-Mail: freizeit@muster-gemeinde.de
+      </p>
+
+      <h3 style="margin-top:1rem; font-size:1rem;">Bilder hinzufügen</h3>
+      <p class="help-text">
+        Du kannst hier eigene Bilder einfügen, z.&nbsp;B.:
+      </p>
+      <pre style="font-size:0.75rem; background:#f9fafb; padding:0.6rem; border-radius:0.5rem; border:1px solid #e5e7eb; overflow:auto;">
+&lt;img src="bilder/freizeit1.jpg" alt="Kinderfreizeit" style="max-width:100%; border-radius:12px; margin-top:0.5rem;" /&gt;
+      </pre>
+    </section>
+
+    <!-- Formular -->
+    <section class="card">
+      <h2>Anmeldung</h2>
+      <p class="help-text">
+        Bitte das Formular vollständig ausfüllen. Felder mit <span style="color:#b91c1c;">*</span> sind Pflichtfelder.
+      </p>
+
+      <!-- WICHTIG:
+           Damit das Formular „wirklich“ verschickt wird, musst du action="" anpassen, z.B.:
+
+           action="mailto:DEINE-ADRESSE@gemeinde.de"
+           oder
+           action="https://DEIN-SERVER.de/anmeldung"
+      -->
+      <form method="post" action="">
+        <div class="form-row">
+          <h3 style="font-size:1rem;">Angaben Erziehungsberechtigte*r</h3>
+
+          <div class="form-row--two">
+            <div class="field">
+              <label for="parentName">Name Erziehungsberechtigte*r<span class="required">*</span></label>
+              <input id="parentName" name="parentName" type="text" required />
+            </div>
+            <div class="field">
+              <label for="parentPhone">Telefon (für Rückfragen)</label>
+              <input id="parentPhone" name="parentPhone" type="tel" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="parentEmail">E-Mail<span class="required">*</span></label>
+            <input id="parentEmail" name="parentEmail" type="email" required />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <h3 style="font-size:1rem;">Angaben zum Kind</h3>
+
+          <div class="form-row--two">
+            <div class="field">
+              <label for="childFirstName">Vorname<span class="required">*</span></label>
+              <input id="childFirstName" name="childFirstName" type="text" required />
+            </div>
+            <div class="field">
+              <label for="childLastName">Nachname<span class="required">*</span></label>
+              <input id="childLastName" name="childLastName" type="text" required />
+            </div>
+          </div>
+
+          <div class="form-row--two">
+            <div class="field">
+              <label for="childBirthday">Geburtsdatum<span class="required">*</span></label>
+              <input id="childBirthday" name="childBirthday" type="date" required />
+            </div>
+            <div class="field">
+              <label for="childGender">Geschlecht (optional)</label>
+              <select id="childGender" name="childGender">
+                <option value="">Bitte wählen</option>
+                <option value="w">weiblich</option>
+                <option value="m">männlich</option>
+                <option value="d">divers</option>
+                <option value="kA">keine Angabe</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="childAddress">Adresse<span class="required">*</span></label>
+            <input id="childAddress" name="childAddress" type="text" placeholder="Straße, Hausnummer" required />
+          </div>
+
+          <div class="form-row--two">
+            <div class="field">
+              <label for="childZip">PLZ<span class="required">*</span></label>
+              <input id="childZip" name="childZip" type="text" required />
+            </div>
+            <div class="field">
+              <label for="childCity">Ort<span class="required">*</span></label>
+              <input id="childCity" name="childCity" type="text" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="childChurch">Gemeinde/Kirche (optional)</label>
+            <input id="childChurch" name="childChurch" type="text" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <h3 style="font-size:1rem;">Gesundheitliche Hinweise</h3>
+
+          <div class="field">
+            <label for="allergies">Allergien / Unverträglichkeiten</label>
+            <textarea id="allergies" name="allergies"></textarea>
+          </div>
+          <div class="field">
+            <label for="medication">Medikamente</label>
+            <textarea id="medication" name="medication"></textarea>
+          </div>
+          <div class="field">
+            <label for="notes">Sonstige Hinweise</label>
+            <textarea id="notes" name="notes"></textarea>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <h3 style="font-size:1rem;">Einverständnis</h3>
+
+          <div class="checkbox-row">
+            <input id="consentParticipation" name="consentParticipation" type="checkbox" required />
+            <label for="consentParticipation">
+              Ich erkläre mich damit einverstanden, dass mein Kind an der Kinderfreizeit teilnimmt.<span class="required">*</span>
+            </label>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="consentPhotos" name="consentPhotos" type="checkbox" />
+            <label for="consentPhotos">
+              Ich bin einverstanden, dass Fotos der Freizeit, auf denen mein Kind zu sehen ist, intern (z.&nbsp;B. Gemeindebrief) verwendet werden dürfen.
+            </label>
+          </div>
+
+          <div class="checkbox-row">
+            <input id="consentPrivacy" name="consentPrivacy" type="checkbox" required />
+            <label for="consentPrivacy">
+              Ich habe die Datenschutzhinweise zur Kenntnis genommen und stimme der Verarbeitung der Daten zum Zweck der Freizeit-Organisation zu.<span class="required">*</span>
+            </label>
+          </div>
+
+          <p class="form-note">
+            Hinweis: Text zu Datenschutz/Impressum bitte an eure Gemeinde anpassen.
+          </p>
+        </div>
+
+        <div class="actions">
+          <button type="submit">Anmeldung senden</button>
+          <span class="form-note">Nach dem Absenden erhaltet ihr ggf. eine Bestätigung entsprechend eurer Konfiguration.</span>
+        </div>
+      </form>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Ev. Kirchengemeinde Musterstadt ·
+    <a href="#">Impressum</a> ·
+    <a href="#">Datenschutz</a>
+  </footer>
+</div>
+</body>
+</html>
